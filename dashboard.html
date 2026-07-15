@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Student Attendance System - Light Theme</title>
+    <!-- Tailwind CSS for modern utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts: Inter and Kantumruy Pro (for Khmer) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kantumruy+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+   <style>
+     body {
+            font-family: 'Inter', 'Kantumruy Pro', sans-serif;
+            background-color: #f8fafc; 
+            color: #0f172a; 
+        }
+        
+        /* Premium Light Soft Shadow & Glow Effects */
+        .glow-active-tab { 
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); 
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+        
+        /* Soft Drop Shadows for Cards */
+        .glow-cyan { box-shadow: 0 4px 12px rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.15); }
+        .glow-purple { box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); }
+        .glow-pink { box-shadow: 0 4px 12px rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.15); }
+        .glow-amber { box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.15); }
+        .glow-emerald { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); }
+        
+        /* Glassmorphism Card Style for Light Mode */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+   </style>
+</head>
+<body class="min-h-screen flex">
+
+    <!-- 1. LEFT SIDEBAR (Clean White Sidebar) -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 h-screen">
+        <div>
+            <!-- SETEC Logo Section -->
+           <!-- SETEC Logo Section -->
+<div class="p-6 flex items-center gap-3">
+                <div class="bg-blue-600 p-2.5 rounded-xl flex items-center justify-center text-white font-black tracking-wider text-sm shadow-md shadow-blue-500/20 glow-active-tab">
+                    SETEC
+                </div>
+                <div>
+                    <h1 class="text-slate-800 font-extrabold tracking-wide leading-tight text-md">SETEC</h1>
+                    <p class="text-[9px] text-blue-600 font-bold tracking-wider uppercase">PORTAL</p>
+                </div>
+            </div>
+
+            <!-- ============================================= -->
+            <!-- 1.1 ADDED: USER PROFILE SECTION (ព័ត៌មានអ្នកប្រើប្រាស់) -->
+            <!-- ============================================= -->
+            <div class="px-6 py-4 mb-4 border-b border-t border-slate-100 flex items-center gap-3 bg-slate-50/50">
+                
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 font-extrabold flex items-center justify-center border border-blue-200 text-sm shadow-sm">
+                    TR
+                </div>
+                <!-- ឈ្មោះ និង តួនាទី -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-800 tracking-wide">Sok Dara</h4>
+                    <p class="text-[10px] text-slate-400 font-medium">Instructor / Admin</p>
+                </div>
+            </div>
+            <!-- ============================================= -->
+
+            <!-- Navigation Links -->
+            <nav class="px-4 py-2 space-y-1.5">
+                <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white bg-blue-600 font-semibold transition duration-200 glow-active-tab">
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" onclick="switchTab('students')" id="nav-students" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-600 hover:bg-slate-50 font-medium transition duration-200">
+                    <i class="bi bi-mortarboard"></i>
+                    <span>Students</span>
+                </a>
+                <a href="#" onclick="switchTab('attendance')" id="nav-attendance" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-600 hover:bg-slate-50 font-medium transition duration-200">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Mark Attendance</span>
+                </a>
+                <a href="#" onclick="switchTab('report')" id="nav-report" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-600 hover:bg-slate-50 font-medium transition duration-200">
+                    <i class="bi bi-file-earmark-bar-graph"></i>
+                    <span>Month Report</span>
+                </a>
+                <a href="#" onclick="switchTab('settings')" id="nav-settings" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-600 hover:bg-slate-50 font-medium transition duration-200">
+        <i class="bi bi-gear"></i>
+        <span>Settings</span>
+    </a>
+            </nav>
+        </div>
+
+        <!-- Sidebar Footer -->
+        
+        </div>
+    </aside>
+
+    <!-- 2. MAIN CONTENT AREA -->
+    <main class="flex-1 p-8 overflow-y-auto max-w-7xl mx-auto w-full">
+        
+        <!-- HEADER -->
+        <header class="flex justify-between items-center mb-8">
+            <h2 id="page-title" class="text-3xl font-extrabold tracking-tight text-slate-800">Dashboard</h2>
+            <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
+                <i class="bi bi-calendar3 text-blue-600"></i>
+                <span id="current-date-text" class="text-sm font-semibold text-slate-600">July 15, 2026</span>
+            </div>
+        </header>
+
+        <!-- ============================================= -->
+        <!-- TAB 1: DASHBOARD VIEW -->
+        <!-- ============================================= -->
+        <div id="tab-dashboard" class="space-y-8">
+            <!-- Statistics Cards Row -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="glass-card p-5 rounded-2xl glow-cyan flex items-center gap-4">
+                    <div class="bg-cyan-50 text-cyan-600 p-3.5 rounded-2xl text-xl"><i class="bi bi-people-fill"></i></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Students</p>
+                        <h3 id="stat-total" class="text-2xl font-black text-slate-800 mt-1">4</h3>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl glow-emerald flex items-center gap-4">
+                    <div class="bg-emerald-50 text-emerald-600 p-3.5 rounded-2xl text-xl"><i class="bi bi-check-circle-fill"></i></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Present Today</p>
+                        <h3 id="stat-present" class="text-2xl font-black text-emerald-600 mt-1">0</h3>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl glow-pink flex items-center gap-4">
+                    <div class="bg-rose-50 text-rose-600 p-3.5 rounded-2xl text-xl"><i class="bi bi-x-circle-fill"></i></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Absent Today</p>
+                        <h3 id="stat-absent" class="text-2xl font-black text-rose-600 mt-1">0</h3>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl glow-amber flex items-center gap-4">
+                    <div class="bg-amber-50 text-amber-600 p-3.5 rounded-2xl text-xl"><i class="bi bi-clock-fill"></i></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Late Today</p>
+                        <h3 id="stat-late" class="text-2xl font-black text-amber-600 mt-1">0</h3>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl glow-purple flex items-center gap-4">
+                    <div class="bg-purple-50 text-purple-600 p-3.5 rounded-2xl text-xl"><i class="bi bi-envelope-fill"></i></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Excused Today</p>
+                        <h3 id="stat-excused" class="text-2xl font-black text-purple-600 mt-1">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Body -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Active Students Name List -->
+                <div class="glass-card p-6 rounded-2xl glow-cyan flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-md font-bold flex items-center gap-2 mb-1 text-slate-800">
+                            <i class="bi bi-list-check text-blue-600"></i> Active Students Name List
+                        </h4>
+                        <p class="text-xs text-slate-400 mb-4">ឈ្មោះសិស្សទាំងអស់ដែលបានចុះឈ្មោះក្នុងប្រព័ន្ធ</p>
+                        <div id="dashboard-student-names" class="space-y-2.5 max-h-[190px] overflow-y-auto pr-2"></div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 text-right">
+                        <button onclick="switchTab('students')" class="text-xs font-semibold text-blue-600 hover:text-blue-500">
+                            Manage Directory <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Attendance Rate Card -->
+                <div class="glass-card p-6 rounded-2xl glow-purple flex flex-col justify-between">
+                    <h4 class="text-md font-bold flex items-center gap-2 mb-1 text-slate-800">
+                        <i class="bi bi-bar-chart-fill text-purple-600"></i> Attendance Rate
+                    </h4>
+                    <p class="text-xs text-slate-400 mb-4">ភាគរយវត្តមានសរុបប្រចាំថ្ងៃ</p>
+                    <div class="flex-1 flex flex-col justify-center items-center py-4">
+                        <div class="relative w-32 h-32 rounded-full border-8 border-slate-100 flex flex-col items-center justify-center">
+                            <span id="chart-rate-text" class="text-2xl font-black text-slate-800">0%</span>
+                            <span class="text-[9px] text-slate-400 uppercase tracking-widest font-semibold mt-0.5">Rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Portal Actions -->
+                <div class="glass-card p-6 rounded-2xl glow-emerald flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-md font-bold flex items-center gap-2 mb-1 text-slate-800">
+                            <i class="bi bi-shield-check text-emerald-600"></i> Daily Portal Actions
+                        </h4>
+                        <p class="text-xs text-slate-400 mb-6">គ្រប់គ្រង និងកត់ត្រាវត្តមានរហ័សប្រចាំថ្ងៃ</p>
+                        <div class="space-y-2">
+                            <button onclick="switchTab('attendance')" class="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-3 rounded-xl transition duration-150 flex items-center justify-center gap-2 shadow-sm">
+                                <i class="bi bi-pencil-square"></i> Go To Attendance Sheet
+                            </button>
+                            <button onclick="switchTab('report')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-3 rounded-xl transition duration-150 flex items-center justify-center gap-2 border border-slate-200">
+                                <i class="bi bi-file-earmark-text"></i> View Historical Logs
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-[10px] text-center text-slate-400 mt-4">
+                        Last auto-backup: Active in browser memory
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Attendance Trend Chart -->
+            <div class="glass-card p-6 rounded-2xl min-h-[250px] flex flex-col">
+                <h4 class="text-lg font-bold text-slate-800 mb-4">Weekly Attendance Trend</h4>
+                <div class="flex-1 flex items-end justify-between px-4 pt-8 pb-2 border-b border-slate-150">
+                    <div class="flex flex-col items-center gap-2 w-1/5">
+                        <div class="w-8 bg-blue-100 hover:bg-blue-500 rounded-t-md transition-all duration-300" style="height: 120px;"></div>
+                        <span class="text-xs text-slate-400">Mon</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 w-1/5">
+                        <div class="w-8 bg-blue-100 hover:bg-blue-500 rounded-t-md transition-all duration-300" style="height: 140px;"></div>
+                        <span class="text-xs text-slate-400">Tue</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 w-1/5">
+                        <div class="w-8 bg-blue-100 hover:bg-blue-500 rounded-t-md transition-all duration-300" style="height: 150px;"></div>
+                        <span class="text-xs text-slate-400">Wed</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 w-1/5">
+                        <div class="w-8 bg-blue-100 hover:bg-blue-500 rounded-t-md transition-all duration-300" style="height: 110px;"></div>
+                        <span class="text-xs text-slate-400">Thu</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 w-1/5">
+                        <div class="w-8 bg-blue-100 hover:bg-blue-500 rounded-t-md transition-all duration-300" style="height: 160px;"></div>
+                        <span class="text-xs text-slate-400">Fri</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- TAB 2: REGISTER/MANAGE STUDENTS -->
+        <!-- ============================================= -->
+        <div id="tab-students" class="hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Form to Add Student -->
+                <div class="glass-card p-6 rounded-2xl h-fit">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-600">
+                        <i class="bi bi-person-plus-fill"></i> Register New Student
+                    </h3>
+                    <form id="student-form" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Student Name</label>
+                            <input type="text" id="student-name" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 transition text-slate-800" placeholder="e.g. SOK Sophea">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Roll ID / ID Card</label>
+                            <input type="text" id="student-id" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 transition text-slate-800" placeholder="e.g. SETEC-0102">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Class Section</label>
+                            <input type="text" id="student-class" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 transition text-slate-800" placeholder="e.g. MIS G12">
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition duration-200 shadow-sm">
+                            Add to Directory
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Student Directory Table -->
+                <div class="glass-card p-6 rounded-2xl lg:col-span-2">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2 text-slate-800">
+                        <i class="bi bi-person-lines-fill text-blue-600"></i> Registered Directory
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    <th class="py-3 px-4">Student ID</th>
+                                    <th class="py-3 px-4">Name</th>
+                                    <th class="py-3 px-4">Class</th>
+                                    <th class="py-3 px-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-list-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- TAB 3: MARK ATTENDANCE -->
+        <!-- ============================================= -->
+        <div id="tab-attendance" class="hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">Today's Attendance List</h3>
+                        <p class="text-xs text-slate-400 mt-1">Please mark the appropriate status for each student and save the sheet.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="setBulkAttendance('Present')" class="px-3 py-1.5 text-xs font-semibold bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-lg transition">All Present</button>
+                        <button onclick="setBulkAttendance('Absent')" class="px-3 py-1.5 text-xs font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg transition">All Absent</button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <th class="py-3 px-4">Student ID</th>
+                                <th class="py-3 px-4">Name</th>
+                                <th class="py-3 px-4">Class</th>
+                                <th class="py-3 px-4 text-center">Status Toggle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendance-list-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex justify-end">
+                    <button onclick="saveAttendance()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl shadow-md flex items-center gap-2 transition duration-200">
+                        <i class="bi bi-cloud-arrow-up-fill"></i> Save Daily Records
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================= -->
+        <!-- TAB 4: MONTHLY REPORT -->
+        <!-- ============================================= -->
+        <div id="tab-report" class="hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">Historical Records</h3>
+                        <p class="text-xs text-slate-400 mt-1">Showing full history logs stored in LocalStorage.</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl">
+                        <label class="text-xs text-slate-500 font-bold">Filter Date:</label>
+                        <input type="date" id="filter-date-input" onchange="renderReportTable()" class="bg-transparent text-slate-800 border-none outline-none focus:ring-0 text-sm">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <th class="py-3 px-4">Date</th>
+                                <th class="py-3 px-4">Student ID</th>
+                                <th class="py-3 px-4">Name</th>
+                                <th class="py-3 px-4">Class</th>
+                                <th class="py-3 px-4">Recorded Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-list-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 3. CUSTOM CONFIRMATION MODAL -->
+    <div id="delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-all">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-200">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="bg-rose-50 text-rose-500 p-3 rounded-full text-xl flex items-center justify-center shrink-0">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800">លុបទិន្នន័យសិស្ស?</h3>
+                    <p class="text-xs text-slate-400">លុបគណនីសិស្សនេះចេញពីប្រព័ន្ធ</p>
+                </div>
+            </div>
+            
+            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+                តើអ្នកពិតជាចង់លុបសិស្សឈ្មោះ <span id="modal-student-name" class="font-bold text-slate-800"></span> (<span id="modal-student-id" class="font-semibold text-blue-600"></span>) នេះមែនទេ? រាល់ទិន្នន័យនឹងត្រូវលុបចោលជាអចិន្ត្រៃយ៍។
+            </p>
+
+            <div class="flex gap-2.5 justify-end">
+                <button onclick="closeDeleteModal()" class="px-4.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold rounded-xl transition duration-150">
+                    បោះបង់
+                </button>
+                <button id="confirm-delete-btn" class="px-4.5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold rounded-xl shadow-md shadow-rose-500/10 transition duration-150">
+                    យល់ព្រមលុប
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+   <script>
+    const defaultStudents = [
+    { id: "SETEC-001", name: "Chan Oudom", sClass: "MIS G12" },
+    { id: "SETEC-002", name: "Keo Sophea", sClass: "MIS G12" },
+    { id: "SETEC-003", name: "Seng Dara", sClass: "MIS G12" },
+    { id: "SETEC-004", name: "Nguon Piseth", sClass: "CS G11" }
+];
+
+// State variables
+let students = JSON.parse(localStorage.getItem('setec_students')) || defaultStudents;
+let attendanceDb = JSON.parse(localStorage.getItem('setec_attendance')) || {};
+let studentIdToDelete = null; 
+
+const getTodayString = () => new Date().toISOString().split('T')[0];
+
+// Initialize App on Page Load
+window.addEventListener('DOMContentLoaded', () => {
+    const dateObj = new Date();
+    
+   
+    const dateTextEl = document.getElementById('current-date-text');
+    if (dateTextEl) {
+        dateTextEl.innerText = dateObj.toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+    }
+    
+    const filterDateInput = document.getElementById('filter-date-input');
+    if (filterDateInput) {
+        filterDateInput.value = getTodayString();
+    }
+
+    if (!localStorage.getItem('setec_students')) {
+        localStorage.setItem('setec_students', JSON.stringify(defaultStudents));
+    }
+
+    renderAll();
+});
+
+// =============================================
+// TAB SWITCHING LOGIC (បានកែសម្រួលឱ្យដើរពេញលេញ)
+// =============================================
+function switchTab(tabId) {
+   
+    const allTabs = ['tab-dashboard', 'tab-students', 'tab-attendance', 'tab-report', 'tab-settings'];
+    allTabs.forEach(id => {
+        const tabElement = document.getElementById(id);
+        if (tabElement) {
+            tabElement.classList.add('hidden');
+        }
+    });
+
+    
+    const activeTab = document.getElementById(`tab-${tabId}`);
+    if (activeTab) {
+        activeTab.classList.remove('hidden');
+    }
+
+   
+    const navIds = ['dashboard', 'students', 'attendance', 'report', 'settings'];
+    navIds.forEach(id => {
+        const navElement = document.getElementById(`nav-${id}`);
+        if (navElement) {
+            if (id === tabId) {
+                navElement.className = "flex items-center gap-3 px-4 py-3 rounded-xl text-white bg-blue-600 font-semibold transition duration-200 glow-active-tab";
+            } else {
+                navElement.className = "flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-600 hover:bg-slate-50 font-medium transition duration-200";
+            }
+        }
+    });
+
+  
+    const titleMap = {
+        dashboard: 'Dashboard',
+        students: 'Students Directory',
+        attendance: 'Mark Daily Attendance',
+        report: 'Monthly Records',
+        settings: 'System Settings'
+    };
+    
+    const pageTitleEl = document.getElementById('page-title');
+    if (pageTitleEl && titleMap[tabId]) {
+        pageTitleEl.innerText = titleMap[tabId];
+    }
+
+    renderAll();
+}
+
+// --- Core Rendering Engine ---
+function renderAll() {
+    
+    if (document.getElementById('stat-total')) renderDashboardStats();
+    if (document.getElementById('dashboard-student-names')) renderDashboardNames();
+    if (document.getElementById('student-list-body')) renderStudentsTable();
+    if (document.getElementById('attendance-list-body')) renderAttendanceList();
+    if (document.getElementById('report-list-body')) renderReportTable();
+}
+
+// Render Dashboard Statistics
+function renderDashboardStats() {
+    const today = getTodayString();
+    const todayRecords = attendanceDb[today] || {};
+
+    let presentCount = 0;
+    let absentCount = 0;
+    let lateCount = 0;
+    let excusedCount = 0;
+
+    students.forEach(student => {
+        const status = todayRecords[student.id];
+        if (status === 'Present') presentCount++;
+        else if (status === 'Absent') absentCount++;
+        else if (status === 'Late') lateCount++;
+        else if (status === 'Excused') excusedCount++;
+    });
+
+    const total = students.length;
+    const attendedSum = presentCount + lateCount + excusedCount; 
+    const attendanceRate = total > 0 ? Math.round((attendedSum / total) * 100) : 0;
+
+    document.getElementById('stat-total').innerText = total;
+    document.getElementById('stat-present').innerText = presentCount;
+    document.getElementById('stat-absent').innerText = absentCount;
+    document.getElementById('stat-late').innerText = lateCount;
+    document.getElementById('stat-excused').innerText = excusedCount;
+    
+    document.getElementById('chart-rate-text').innerText = `${attendanceRate}%`;
+}
+
+// Render student name listings directly on the Dashboard
+function renderDashboardNames() {
+    const nameContainer = document.getElementById('dashboard-student-names');
+    nameContainer.innerHTML = '';
+
+    if (students.length === 0) {
+        nameContainer.innerHTML = `
+            <div class="text-xs text-slate-400 italic py-4 text-center">
+                <i class="bi bi-info-circle"></i> No registered students found.
+            </div>
+        `;
+        return;
+    }
+
+    students.forEach(student => {
+        const item = document.createElement('div');
+        item.className = "flex justify-between items-center bg-slate-50 border border-slate-100 px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition duration-150";
+        item.innerHTML = `
+            <div class="flex items-center gap-2.5">
+                <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                <span class="text-sm font-semibold text-slate-700 tracking-wide">${student.name}</span>
+            </div>
+            <span class="text-[10px] bg-slate-100 border border-slate-200 text-slate-500 px-2 py-0.5 rounded-md font-mono">${student.id}</span>
+        `;
+        nameContainer.appendChild(item);
+    });
+}
+
+// Render Student Management Directory Table
+function renderStudentsTable() {
+    const tbody = document.getElementById('student-list-body');
+    tbody.innerHTML = '';
+
+    students.forEach(student => {
+        const row = document.createElement('tr');
+        row.className = "border-b border-slate-100 text-sm hover:bg-slate-50/50";
+        row.innerHTML = `
+            <td class="py-4 px-4 font-bold text-blue-600">${student.id}</td>
+            <td class="py-4 px-4 font-medium text-slate-800">${student.name}</td>
+            <td class="py-4 px-4"><span class="bg-slate-100 px-3 py-1 rounded-full text-xs border border-slate-200 text-slate-600">${student.sClass}</span></td>
+            <td class="py-4 px-4 text-right">
+                <button onclick="openDeleteModal('${student.id}', '${student.name}')" class="text-rose-500 hover:text-rose-600 font-semibold text-xs">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Handle Add Student Form Submit
+const studentForm = document.getElementById('student-form');
+if (studentForm) {
+    studentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const idInput = document.getElementById('student-id');
+        const nameInput = document.getElementById('student-name');
+        const classInput = document.getElementById('student-class');
+
+        const newId = idInput.value.trim().toUpperCase();
+
+        if (students.some(s => s.id === newId)) {
+            alert("Student ID already exists!");
+            return;
+        }
+
+        students.push({
+            id: newId,
+            name: nameInput.value.trim(),
+            sClass: classInput.value.trim()
+        });
+
+        localStorage.setItem('setec_students', JSON.stringify(students));
+        idInput.value = '';
+        nameInput.value = '';
+        classInput.value = '';
+        
+        renderAll();
+    });
+}
+
+// POP-UP CONFIRMATION MODAL FUNCTIONS
+function openDeleteModal(id, name) {
+    studentIdToDelete = id; 
+    
+    document.getElementById('modal-student-name').innerText = name;
+    document.getElementById('modal-student-id').innerText = id;
+    
+    const modal = document.getElementById('delete-modal');
+    modal.classList.remove('hidden');
+    
+    document.getElementById('confirm-delete-btn').onclick = function() {
+        executeDeleteStudent();
+    };
+}
+
+// មុខងារបិទ Modal
+const closeBtn = document.getElementById('close-delete-modal-btn');
+if (closeBtn) {
+    closeBtn.onclick = closeDeleteModal;
+}
+
+function closeDeleteModal() {
+    const modal = document.getElementById('delete-modal');
+    if (modal) modal.classList.add('hidden');
+    studentIdToDelete = null;
+}
+
+function executeDeleteStudent() {
+    if (studentIdToDelete) {
+        students = students.filter(s => s.id !== studentIdToDelete);
+        localStorage.setItem('setec_students', JSON.stringify(students));
+        closeDeleteModal();
+        renderAll();
+    }
+}
+
+// Render Attendance Sheet
+function renderAttendanceList() {
+    const tbody = document.getElementById('attendance-list-body');
+    tbody.innerHTML = '';
+
+    const today = getTodayString();
+    const todayRecords = attendanceDb[today] || {};
+
+    students.forEach(student => {
+        const currentStatus = todayRecords[student.id] || 'Present';
+        const row = document.createElement('tr');
+        row.className = "border-b border-slate-100 text-sm";
+        row.innerHTML = `
+            <td class="py-4 px-4 font-bold text-slate-400">${student.id}</td>
+            <td class="py-4 px-4 font-semibold text-slate-800">${student.name}</td>
+            <td class="py-4 px-4"><span class="bg-slate-50 border border-slate-200 px-3 py-1 rounded-full text-xs text-slate-500">${student.sClass}</span></td>
+            <td class="py-4 px-4">
+                <div class="flex items-center justify-center gap-2">
+                    <button onclick="toggleStatus('${student.id}', 'Present')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition duration-200 ${currentStatus === 'Present' ? 'bg-emerald-500 text-white shadow-sm' : 'bg-slate-100 text-slate-400 hover:text-slate-600'}">Present</button>
+                    <button onclick="toggleStatus('${student.id}', 'Absent')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition duration-200 ${currentStatus === 'Absent' ? 'bg-rose-500 text-white shadow-sm' : 'bg-slate-100 text-slate-400 hover:text-slate-600'}">Absent</button>
+                    <button onclick="toggleStatus('${student.id}', 'Late')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition duration-200 ${currentStatus === 'Late' ? 'bg-amber-500 text-slate-900 shadow-sm' : 'bg-slate-100 text-slate-400 hover:text-slate-600'}">Late</button>
+                    <button onclick="toggleStatus('${student.id}', 'Excused')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition duration-200 ${currentStatus === 'Excused' ? 'bg-purple-500 text-white shadow-sm' : 'bg-slate-100 text-slate-400 hover:text-slate-600'}">Excused</button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Change single student attendance status
+function toggleStatus(studentId, status) {
+    const today = getTodayString();
+    if (!attendanceDb[today]) {
+        attendanceDb[today] = {};
+    }
+    attendanceDb[today][studentId] = status;
+    renderAttendanceList();
+}
+
+// Set all students status instantly 
+function setBulkAttendance(status) {
+    const today = getTodayString();
+    if (!attendanceDb[today]) {
+        attendanceDb[today] = {};
+    }
+    students.forEach(student => {
+        attendanceDb[today][student.id] = status;
+    });
+    renderAttendanceList();
+}
+
+// Save attendance to LocalStorage
+function saveAttendance() {
+    const today = getTodayString();
+    
+    if (!attendanceDb[today]) {
+        attendanceDb[today] = {};
+    }
+    students.forEach(student => {
+        if (!attendanceDb[today][student.id]) {
+            attendanceDb[today][student.id] = 'Present';
+        }
+    });
+
+    localStorage.setItem('setec_attendance', JSON.stringify(attendanceDb));
+    alert(`Saved successfully for today (${today})!`);
+    renderAll();
+}
+
+// Render Report Table
+function renderReportTable() {
+    const tbody = document.getElementById('report-list-body');
+    tbody.innerHTML = '';
+
+    const filterInput = document.getElementById('filter-date-input');
+    if (!filterInput) return;
+
+    const selectedDate = filterInput.value;
+    const records = attendanceDb[selectedDate] || {};
+
+    const matchedStudents = students.filter(student => records[student.id]);
+
+    if (matchedStudents.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="py-8 text-center text-sm text-slate-400 font-medium">No records saved for this selected date.</td>
+            </tr>
+        `;
+        return;
+    }
+
+    matchedStudents.forEach(student => {
+        const status = records[student.id];
+        let badgeClass = "bg-emerald-50 text-emerald-600 border border-emerald-200";
+        if (status === 'Absent') badgeClass = "bg-rose-50 text-rose-600 border border-rose-200";
+        if (status === 'Late') badgeClass = "bg-amber-50 text-amber-600 border border-amber-200";
+        if (status === 'Excused') badgeClass = "bg-purple-50 text-purple-600 border border-purple-200";
+
+        const row = document.createElement('tr');
+        row.className = "border-b border-slate-100 text-sm hover:bg-slate-50/50";
+        row.innerHTML = `
+            <td class="py-4 px-4 text-slate-500 font-medium">${selectedDate}</td>
+            <td class="py-4 px-4 font-bold text-slate-700">${student.id}</td>
+            <td class="py-4 px-4 font-semibold text-slate-800">${student.name}</td>
+            <td class="py-4 px-4"><span class="bg-slate-50 border border-slate-200 px-3 py-1 rounded-full text-xs text-slate-600">${student.sClass}</span></td>
+            <td class="py-4 px-4"><span class="${badgeClass} px-3 py-1 rounded-full text-xs font-bold">${status}</span></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+   </script>
+</body>
+</html>
